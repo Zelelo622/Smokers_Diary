@@ -17,6 +17,9 @@ class UserController {
         if (!name || !password) {
             return next(ApiError.badRequest('Некорректное имя или пароль'));
         }
+        if (!role) {
+            return next(ApiError.badRequest('Не выбрана роль'));
+        }
         const candidate = await User.findOne({ where: { name } });
         if (candidate) {
             return next(ApiError.badRequest('Пользователь с таким именем уже существует'))

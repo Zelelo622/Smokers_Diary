@@ -3,11 +3,17 @@ import { Container, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
+import Select from "react-select"
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
+
+const roles = [
+    { value: 'USER', label: 'Пользователь' },
+    { value: 'ADMIN', label: 'Администратор' },
+];
 
 const Auth = observer(() => {
     const { user } = useContext(Context)
@@ -16,7 +22,7 @@ const Auth = observer(() => {
     const isLogin = location.pathname === LOGIN_ROUTE;
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-
+    const [role, setRole] = useState('');
 
     const click = async () => {
         try {
@@ -24,7 +30,7 @@ const Auth = observer(() => {
             if (isLogin) {
                 data = await login(name, password);
             } else {
-                data = await registration(name, password);
+                data = await registration(name, password, role);
             }
             user.setUser(data)
             user.setIsAuth(true)
@@ -55,6 +61,9 @@ const Auth = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                         type="password"
                     />
+                    {!isLogin &&
+                        <Select className="mt-3" options={roles} onChange={role => setRole(role.value)} />
+                    }
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
                             <div className="mb-3">
