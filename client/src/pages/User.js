@@ -5,9 +5,9 @@ const Admin = () => {
     return (
         <Container>
             <div>
-                <h2>Панель администратора</h2>
+                <h2>Панель пользователя</h2>
                 <div className="d-flex align-items-center">
-                    ADMIN PANEL
+                    USER PANEL
                 </div>
             </div>
         </Container>

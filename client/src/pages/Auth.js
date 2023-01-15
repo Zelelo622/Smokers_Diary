@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Select from "react-select"
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
@@ -32,11 +32,19 @@ const Auth = observer(() => {
             } else {
                 data = await registration(name, password, role);
             }
-            user.setUser(data)
-            user.setIsAuth(true)
-            navigate(ADMIN_ROUTE)
+            user.setUser(data);
+            user.setIsAuth(true);
+            roleVerification(data.role);
         } catch (e) {
-            alert(e.response.data.message)
+            alert(e.response.data.message);
+        }
+    }
+
+    function roleVerification(role) {
+        if (role === 'USER') {
+            navigate(USER_ROUTE);
+        } else if (role === 'ADMIN') {
+            navigate(ADMIN_ROUTE);
         }
     }
 
