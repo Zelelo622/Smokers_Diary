@@ -1,17 +1,17 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const User = () => {
+const Profile = () => {
     return (
         <Container>
             <div>
-                <h2>Панель пользователя</h2>
+                <h2>Профиль пользователя</h2>
                 <div className="d-flex align-items-center">
-                    USER PANEL
+                    PROFILE
                 </div>
             </div>
         </Container>
     );
 };
 
-export default User;
+export default Profile;

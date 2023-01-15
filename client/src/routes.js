@@ -1,7 +1,9 @@
 import User from './pages/User';
 import Admin from './pages/Admin';
 import Auth from './pages/Auth';
-import { ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "./utils/consts";
+import Profile from './pages/Profile';
+import Home from './pages/Home';
+import { ADMIN_ROUTE, USER_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, PROFILE, HOME } from "./utils/consts";
 
 export const authRoutes = [
     {
@@ -11,6 +13,10 @@ export const authRoutes = [
     {
         path: USER_ROUTE,
         Component: User
+    },
+    {
+        path: PROFILE,
+        Component: Profile
     }
 ]
 
@@ -23,4 +29,8 @@ export const publicRoutes = [
         path: REGISTRATION_ROUTE,
         Component: Auth
     },
+    {
+        path: HOME,
+        Component: Home
+    }
 ]
